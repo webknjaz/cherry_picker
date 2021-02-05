@@ -958,7 +958,7 @@ def test_push_to_remote_fail(tmp_git_repo_dir):
     with mock.patch("cherry_picker.cherry_picker.validate_sha", return_value=True):
         cherry_picker = CherryPicker("origin", "xxx", [])
 
-    cherry_picker.push_to_remote("main", "backport-branch-test")
+    cherry_picker.push_to_remote("main", "backport-branch-test", "")
     assert get_state() == WORKFLOW_STATES.PUSHING_TO_REMOTE_FAILED
 
 
@@ -971,7 +971,7 @@ def test_push_to_remote_interactive(tmp_git_repo_dir):
         mock.patch.object(cherry_picker, "open_pr"),
         mock.patch.object(cherry_picker, "get_pr_url", return_value="https://pr_url"),
     ):
-        cherry_picker.push_to_remote("main", "backport-branch-test")
+        cherry_picker.push_to_remote("main", "backport-branch-test", "")
     assert get_state() == WORKFLOW_STATES.PR_OPENING
 
 
@@ -984,7 +984,7 @@ def test_push_to_remote_botflow(tmp_git_repo_dir, monkeypatch):
         mock.patch.object(cherry_picker, "run_cmd"),
         mock.patch.object(cherry_picker, "create_gh_pr"),
     ):
-        cherry_picker.push_to_remote("main", "backport-branch-test")
+        cherry_picker.push_to_remote("main", "backport-branch-test", "")
     assert get_state() == WORKFLOW_STATES.PR_CREATING
 
 
@@ -997,7 +997,7 @@ def test_push_to_remote_no_auto_pr(tmp_git_repo_dir, monkeypatch):
         mock.patch.object(cherry_picker, "run_cmd"),
         mock.patch.object(cherry_picker, "create_gh_pr"),
     ):
-        cherry_picker.push_to_remote("main", "backport-branch-test")
+        cherry_picker.push_to_remote("main", "backport-branch-test", "")
     assert get_state() == WORKFLOW_STATES.PUSHED_TO_REMOTE
 
 

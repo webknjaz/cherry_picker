@@ -419,7 +419,7 @@ $ cherry_picker --abort
 """)
         self.set_paused_state()
 
-    def push_to_remote(self, base_branch, head_branch, commit_message=""):
+    def push_to_remote(self, base_branch, head_branch, commit_message):
         """git push <origin> <branchname>"""
         set_state(WORKFLOW_STATES.PUSHING_TO_REMOTE)
 
@@ -664,7 +664,11 @@ $ cherry_picker --abort
                     self.run_cmd(cmd)
 
             if self.push:
-                self.push_to_remote(base, cherry_pick_branch)
+                self.push_to_remote(
+                    base,
+                    cherry_pick_branch,
+                    commit_message,
+                )
 
                 if not self.is_mirror():
                     self.cleanup_branch(cherry_pick_branch)
