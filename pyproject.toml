@@ -34,6 +34,7 @@ dependencies = [
 optional-dependencies.dev = [
   "pytest",
   "pytest-cov",
+  "pytest-mock",
 ]
 urls.Homepage = "https://github.com/python/cherry-picker"
 scripts.cherry_picker = "cherry_picker.cherry_picker:cherry_pick_cli"
